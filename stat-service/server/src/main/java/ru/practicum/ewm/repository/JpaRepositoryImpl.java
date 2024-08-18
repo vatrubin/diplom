@@ -12,7 +12,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class StatsRepositoryImpl implements StatsRepository {
+public class JpaRepositoryImpl implements JpaRepository {
     private final JdbcTemplate jdbcTemplate;
     private final ViewStatsMapper viewStatsMapper;
 

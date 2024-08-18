@@ -40,7 +40,6 @@ public class StatsClient extends BaseClient {
     }
 
     public ResponseEntity<Object> getHit(LocalDateTime start, LocalDateTime end, List<String> uris, Boolean unique) {
-        StringBuilder uriBuilder = new StringBuilder("/stats?start={start}&end={end}");
         Map<String, Object> parameters = Map.of(
                 "start", start.format(formatter),
                 "end", end.format(formatter)
@@ -52,6 +51,6 @@ public class StatsClient extends BaseClient {
         if (unique) {
             parameters.put("unique", true);
         }
-        return get(uriBuilder.toString(), parameters);
+        return get("/stats?start={start}&end={end}", parameters);
     }
 }

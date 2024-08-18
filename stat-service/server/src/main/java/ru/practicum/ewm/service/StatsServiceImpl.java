@@ -5,14 +5,14 @@ import org.springframework.stereotype.Service;
 import ru.practicum.ewm.EndpointHit;
 import ru.practicum.ewm.ViewStats;
 import ru.practicum.ewm.ViewsStatsRequest;
-import ru.practicum.ewm.repository.StatsRepository;
+import ru.practicum.ewm.repository.JpaRepository;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class StatsServiceImpl implements StatsService {
-    private final StatsRepository statRepository;
+    private final JpaRepository statRepository;
 
     @Override
     public void saveHit(EndpointHit hit) {
