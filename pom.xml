@@ -6,11 +6,11 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.2</version>
+        <version>2.7.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <name>explore-with-me</name>
+    <name>Explore With Me</name>
     <modules>
         <module>stat-service</module>
         <module>main-service</module>
@@ -194,7 +194,6 @@
                 <artifactId>hibernate-core</artifactId>
                 <version>5.6.15.Final</version>
             </dependency>
-
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>

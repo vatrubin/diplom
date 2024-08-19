@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import ru.practicum.ewm.EndpointHit;
 import ru.practicum.ewm.ViewStats;
 import ru.practicum.ewm.ViewsStatsRequest;
-import ru.practicum.ewm.repository.StatsRepository;
 
 import java.util.List;
 
