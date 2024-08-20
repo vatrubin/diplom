@@ -1,52 +1,53 @@
-version: '3.1'
+version: "3.8"
+
 services:
-  stat-server:
-    build: ./stat-service/server
-    image: stat-service
-    container_name: server
+  db:
+    image: postgres:14-alpine
+    container_name: "explorers-database"
+    ports:
+      - "6541:5432"
+    environment:
+      - POSTGRES_DB=explore-with-me
+      - POSTGRES_USER=explore-with-me
+      - POSTGRES_PASSWORD=just_explorer
+
+  stat-service:
+    image: service
+    container_name: "container-with-stat-service"
+    build: ./stat-service/service
     ports:
       - "9090:9090"
     depends_on:
-      - statdb
+      - db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://statdb:5432/statdb
-      - SPRING_DATASOURCE_USERNAME=ewm
-      - SPRING_DATASOURCE_PASSWORD=ewm
-      - JAVA_OPTS=-Djdk.httpclient.HttpClient.log=errors,requests
+      - DB_NAME=explore-with-me
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/explore-with-me
+      - SPRING_DATASOURCE_USERNAME=explore-with-me
+      - SPRING_DATASOURCE_PASSWORD=just_explorer
+      - DB_HOST=db
+      - DB_PORT=5432
 
-  statdb:
+  main-db:
     image: postgres:14-alpine
-    volumes:
-      - /var/lib/postgresql/data/
-    container_name: statdb
-
+    container_name: "main-database"
+    ports:
+      - "6542:5432"
     environment:
-      - POSTGRES_DB=statdb
-      - POSTGRES_USER=ewm
-      - POSTGRES_PASSWORD=ewm
+      - POSTGRES_DB=main-service-db
+      - POSTGRES_USER=main-service-explorer
+      - POSTGRES_PASSWORD=just_explorer_but main
 
   main-service:
-    build: ./main-service
     image: main-service
-    container_name: main-service
+    container_name: "container-with-main-service"
+    build: ./main-service
     ports:
       - "8080:8080"
     depends_on:
-      - ewmdb
-      - stat-server
+      - main-db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://ewmdb:5432/ewmdb
-      - SPRING_DATASOURCE_USERNAME=ewm
-      - SPRING_DATASOURCE_PASSWORD=ewm
-      - SERVICES_STATSSERVICE_URI=http://stat-server:9090
-    #   - JAVA_OPTS=-Djdk.httpclient.HttpClient.log=errors,requests
-
-  ewmdb:
-    image: postgres:14-alpine
-    volumes:
-      - /var/lib/postgresql/data/
-    container_name: ewmdb
-    environment:
-      - POSTGRES_DB=ewmdb
-      - POSTGRES_USER=ewm
-      - POSTGRES_PASSWORD=ewm
+      - DB_NAME=main-service-db
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://main-db:5432/main-service-db
+      - SPRING_DATASOURCE_USERNAME=main-service-explorer
+      - SPRING_DATASOURCE_PASSWORD=just_explorer_but main
+      - DB_HOST=main-db
