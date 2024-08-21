@@ -9,6 +9,7 @@ import ru.practicum.ewm.ViewsStatsRequest;
 
 import java.sql.Timestamp;
 import java.util.List;
+import ru.practicum.ewm.mapper.ViewStatsMapper;
 
 @Component
 @RequiredArgsConstructor
