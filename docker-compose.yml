@@ -1,8 +1,8 @@
 version: '3.1'
 services:
   stat-server:
-    build: ./stat-service/server
-    image: stat-service
+    build: ./main-service/server
+    image: main-service
     container_name: server
     ports:
       - "9090:9090"
