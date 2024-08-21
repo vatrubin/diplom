@@ -1,37 +1,29 @@
-version: '3.1'
+version: '3.8'
 services:
-  stat-server:
+  stat-service:
     build: ./stat-service/server
     image: stat-service
     container_name: stat-service
     ports:
       - "9090:9090"
-      - "9091:9091"
-
     depends_on:
       - statdb
     environment:
-      - DATASOURCE_URL=jdbc:postgresql://statdb:5432/statdb
-      - DATASOURCE_USERNAME=postgres
-      - DATASOURCE_PASSWORD=postgres
-      - SERVER_PORT=9090
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://statdb:5432/statdb
+      - SPRING_DATASOURCE_USERNAME=ewm
+      - SPRING_DATASOURCE_PASSWORD=ewm
+      - JAVA_OPTS=-Djdk.httpclient.HttpClient.log=errors,requests
 
   statdb:
-    image: postgres:16.1
+    image: postgres:14-alpine
     volumes:
       - /var/lib/postgresql/data/
     container_name: statdb
 
     environment:
       - POSTGRES_DB=statdb
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    healthcheck:
-      test: pg_isready -q -d $$POSTGRES_DB -U $$POSTGRES_USER
-      timeout: 5s
-      interval: 5s
-      retries: 10
-
+      - POSTGRES_USER=ewm
+      - POSTGRES_PASSWORD=ewm
 
   main-service:
     build: ./main-service
@@ -39,32 +31,22 @@ services:
     container_name: main-service
     ports:
       - "8080:8080"
-      - "8081:8081"
-
     depends_on:
       - ewmdb
-      - stat-server
+      - stat-service
     environment:
-      - BASE_CLIENT_URL=http://stats-server:9090
-      - DATASOURCE_URL=jdbc:postgresql://ewm-db:5432/main_db
-      - DATASOURCE_USERNAME=postgres
-      - DATASOURCE_PASSWORD=postgres
-      - SERVER_PORT=8080
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://ewmdb:5432/ewmdb
+      - SPRING_DATASOURCE_USERNAME=ewm
+      - SPRING_DATASOURCE_PASSWORD=ewm
+      - SERVICES_STATSSERVICE_URI=http://stat-server:9090
+    #   - JAVA_OPTS=-Djdk.httpclient.HttpClient.log=errors,requests
 
   ewmdb:
-    image: postgres:16.1
+    image: postgres:14-alpine
     volumes:
       - /var/lib/postgresql/data/
     container_name: ewmdb
     environment:
       - POSTGRES_DB=ewmdb
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    healthcheck:
-        test: pg_isready -q -d $$POSTGRES_DB -U $$POSTGRES_USER
-        timeout: 5s
-        interval: 5s
-        retries: 10
-volumes:
-  stats_volume:
-  main_volume:
+      - POSTGRES_USER=ewm
+      - POSTGRES_PASSWORD=ewm
