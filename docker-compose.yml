@@ -38,7 +38,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://ewmdb:5432/ewmdb
       - SPRING_DATASOURCE_USERNAME=ewm
       - SPRING_DATASOURCE_PASSWORD=ewm
-      - SERVICES_STATSSERVICE_URI=http://stat-server:9090
+      - SERVICES_STATSSERVICE_URI=http://stat-service:9090
     #   - JAVA_OPTS=-Djdk.httpclient.HttpClient.log=errors,requests
 
   ewmdb:
