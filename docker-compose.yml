@@ -14,7 +14,7 @@ services:
   stat-service:
     image: service
     container_name: "container-with-stat-service"
-    build: ./stat-service/service
+    build: ./stat-service/server
     ports:
       - "9090:9090"
     depends_on:
