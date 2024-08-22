@@ -11,10 +11,10 @@ services:
       - POSTGRES_USER=explore-with-me
       - POSTGRES_PASSWORD=just_explorer
 
-  stat-service:
+  stats-service:
     image: service
-    container_name: "container-with-stat-service"
-    build: ./stat-service/server
+    container_name: "container-with-stats-service"
+    build: ./stats-service/server
     ports:
       - "9090:9090"
     depends_on:
