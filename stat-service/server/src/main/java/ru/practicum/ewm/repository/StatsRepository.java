@@ -6,7 +6,7 @@ import ru.practicum.ewm.ViewsStatsRequest;
 
 import java.util.List;
 
-public interface JpaRepository {
+public interface StatsRepository {
     void saveHit(EndpointHit hit);
 
     List<ViewStats> getStats(ViewsStatsRequest request);
