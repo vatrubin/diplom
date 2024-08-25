@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.ewm.dto.compilatoin.CompilationDto;
 import ru.practicum.ewm.dto.compilatoin.NewCompilationDto;
 import ru.practicum.ewm.dto.compilatoin.UpdateCompilationDto;
-
 import ru.practicum.ewm.service.CompilationService;
 
 import javax.validation.Valid;
