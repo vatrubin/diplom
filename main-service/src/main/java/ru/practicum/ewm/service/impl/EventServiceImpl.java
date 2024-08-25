@@ -385,9 +385,7 @@ public class EventServiceImpl implements EventService {
     }
 
     private List<Request> checkRequestOrEventList(Long eventId, List<Long> requestId) {
-        return requestRepository.findByEventIdAndIdIn(eventId, requestId).orElseThrow(
-                () -> new NotFoundException("Запроса с id = " + requestId + " или события с id = "
-                        + eventId + "не существуют"));
+        return requestRepository.findByEventIdAndIdIn(eventId, requestId);
     }
 
     private Category checkCategory(Long catId) {
