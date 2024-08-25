@@ -378,42 +378,6 @@
                   }
                 }
               ],
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n    \"text\": \"Comment for admin) \"\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{baseUrl}}/comments/users/:userId/events/:eventId",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "comments",
-                    "users",
-                    ":userId",
-                    "events",
-                    ":eventId"
-                  ],
-                  "variable": [
-                    {
-                      "key": "userId",
-                      "value": "4"
-                    },
-                    {
-                      "key": "eventId",
-                      "value": "5"
-                    }
-                  ]
-                }
-              },
               "response": []
             },
             {
