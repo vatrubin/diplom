@@ -352,35 +352,6 @@
               "response": []
             },
             {
-              "name": "Добавление комментария, который потом удалит админ",
-              "event": [
-                {
-                  "listen": "prerequest",
-                  "script": {
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript"
-                  }
-                },
-                {
-                  "listen": "test",
-                  "script": {
-                    "exec": [
-                      "pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
-                      "    pm.response.to.have.status(201);   \r",
-                      "    pm.response.to.be.withBody;\r",
-                      "    pm.response.to.be.json;\r",
-                      "});\r",
-                      ""
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "response": []
-            },
-            {
               "name": "получение комментариев события",
               "event": [
                 {
